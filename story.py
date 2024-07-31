@@ -14,7 +14,13 @@ def generate_story(hints, genre, length):
     """
 
     try:
-        genai.configure(api_key=st.secrets["api_key"])
+        # Debugging: Check if the API key is retrieved correctly
+        api_key = st.secrets.get("api_key", None)
+        if api_key is None:
+            st.error("API key not found in secrets.")
+            return None
+
+        genai.configure(api_key=api_key)
 
         generation_config = {
             "temperature": 1,
