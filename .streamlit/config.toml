@@ -1,4 +1,14 @@
 [server]
 headless = true
-port = $PORT
+port = 8501  # Use a specific port number
 enableCORS = false
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+primaryColor = "#1f77b4"
+backgroundColor = "#f0f2f6"
+secondaryBackgroundColor = "#e3e8ef"
+textColor = "#262730"
+font = "sans serif"

@@ -2,24 +2,8 @@ import streamlit as st
 import google.generativeai as genai
 
 def generate_story(hints, genre, length):
-    """Generates a story based on given parameters.
-
-    Args:
-        hints: Hints or keywords to be included in the story.
-        genre: The genre of the story.
-        length: The desired length of the story.
-
-    Returns:
-        A string containing the story, or None if an error occurs.
-    """
-
     try:
-        # Debugging: Check if the API key is retrieved correctly
-        api_key = st.secrets.get("api_key", None)
-        if api_key is None:
-            st.error("API key not found in secrets.")
-            return None
-
+        api_key = st.secrets["api_key"]["key"]
         genai.configure(api_key=api_key)
 
         generation_config = {
@@ -36,7 +20,6 @@ def generate_story(hints, genre, length):
         )
 
         prompt = f"Create a {length} story in the {genre} genre that includes the following hints: {hints}."
-
         response = model.generate_content(prompt)
         story_text = response.text
 
@@ -46,7 +29,6 @@ def generate_story(hints, genre, length):
         st.error(f"An error occurred: {e}")
         return None
 
-# Streamlit app
 st.set_page_config(page_icon="🧾", page_title="AI Story Generator")
 
 hints = st.text_input("Enter hints for the story:")
